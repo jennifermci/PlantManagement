@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-          <Main path="/"/>
+          <Main path="/home"/>
           <PlantDetails path="/details/:id"/>
           <NewPlant path="/new"/>
       </Router>

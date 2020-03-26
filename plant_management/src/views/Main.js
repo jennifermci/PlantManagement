@@ -4,6 +4,7 @@ import Sky from 'react-sky';
 import axios from 'axios';
 import TopNavbar from '../components/Navbar';
 import PlantList from '../components/PlantList';
+import styles from '../components/divStyle.module.css';
 
 
 
@@ -35,8 +36,8 @@ export default () => {
             // background={'#2f3939'}
            />
            
-            <div>
-                <h3>This is a list of current saved plants:</h3>
+            <div className={styles.boxStyle}>
+                <h3 className={styles.textFont}>Current saved plants:</h3>
                 {loaded && <PlantList plants={plants}/>}
             </div>
 

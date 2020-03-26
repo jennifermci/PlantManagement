@@ -4,6 +4,8 @@ import { Router } from '@reach/router';
 import Main from './views/Main'
 import PlantDetails from './views/PlantDetails';
 import NewPlant from './views/NewPlant';
+import { Nav } from 'react-bootstrap';
+
 
 function App() {
   return (

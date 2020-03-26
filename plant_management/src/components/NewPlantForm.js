@@ -11,13 +11,13 @@ export default () => {
 
     const onSubmitHandler = e => {
         e.preventDefault(); 
-        axios.post('http://localhost:8000/api/plants', {
+        axios.post('http://localhost:8000/api/plants/add', {
             nickname, 
             location,
             species,
         })
             .then(res=>  navigate('/home'))
-            .catch(err=>{ console.log(err)
+            .catch(err=>{ 
                 const errorResponse = err.response.data.errors;
                 const errorArr = [];
                 for (const key of Object.keys(errorResponse)) {
@@ -31,7 +31,7 @@ export default () => {
         <div>
         <form onSubmit={onSubmitHandler}>
             {errors.map((err, index) => <p key={index}>{err}</p>)} 
-            <Link to="/home">return to homepage</Link>
+
             <div>Add a new plant</div>
             <p>
                 <label>nickname (common name):</label><br/>

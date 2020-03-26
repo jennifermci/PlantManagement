@@ -1,13 +1,28 @@
-import React, { useEffect, useState, Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from '@reach/router';
 import Sky from 'react-sky';
-// import axios from 'axios';
+import axios from 'axios';
+import TopNavbar from '../components/Navbar';
+import PlantList from '../components/PlantList';
+
 
 
 export default () => {
+    const [plants, setPlants] = useState([]);
+    const [loaded, setLoaded] = useState(false);
+    useEffect(()=>{
+        axios.get('http://localhost:8000/api/plants')
+            .then(res=>{
+                console.log(res.data)
+                setPlants(res.data);
+                setLoaded(true);
+            });
+
+    },[])
 
     return (
-        <div>          
+        <div>    
+            <TopNavbar/>      
            <Sky
             images ={{
                 0: "https://i.ya-webdesign.com/images/cute-cactus-png-1.png",
@@ -17,10 +32,13 @@ export default () => {
             how= {130} 
             time={40}
             size ={'100px'}
-            background={'#2f3939'}
+            // background={'#2f3939'}
            />
            
-            <Link to="/new">Add a new plant!</Link>  
+            <div>
+                <h3>This is a list of current saved plants:</h3>
+                {loaded && <PlantList plants={plants}/>}
+            </div>
 
 
         </div>

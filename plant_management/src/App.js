@@ -8,12 +8,14 @@ import Reg from "./views/Reg"
 import Login from "./views/Login"
 import Home from "./views/Home"
 import Test from "./views/test"
+import { Nav } from 'react-bootstrap';
+
 
 function App() {
   return (
     <div className="App">
       <Router>
-          <Main path="/"/>
+          <Main path="/home"/>
           <PlantDetails path="/details/:id"/>
           <NewPlant path="/new"/>
           <Reg path ="/register"/>

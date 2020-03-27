@@ -9,10 +9,10 @@ const PlantSchema = new mongoose.Schema({
         type: String,
         required: true
         },
-    species: {
+    apid: {
         type: String,
-        required: false
-        }
+        required: true
+    }
 }, {timestamps: true })
 
 const Plant = mongoose.model("Plant", PlantSchema)

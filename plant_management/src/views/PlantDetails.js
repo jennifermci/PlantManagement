@@ -2,39 +2,33 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { navigate,Link } from '@reach/router';
 import TopNavbar from '../components/Navbar';
+import Displaydetails from "../components/displaydetails"
 
 export default props => {
-    const { id } = props;
+    const { _id } = props;
     const [nickname, setNickname] = useState();
     const [location, setLocation] = useState();
-    const [species, setSpecies] = useState();
+    const [id, setId] = useState();
     const [plant, setPlant] = useState({})
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/plants/' + id)
+        axios.get('http://localhost:8000/api/plants/' + _id)
             .then(res => {
-                setNickname(res.data.nickname);
-                setLocation(res.data.location);
-                setSpecies(res.data.species);
-                setPlant(res.data)
+                setNickname(res.data.plant.nickname);
+                setLocation(res.data.plant.location);
+                setId(res.data.plant.apid);
+                setPlant(res.data.plant)
+                setLoaded(true)
             })
     }, [])
-    const deletePlant = (plantId) => {
-        axios.delete('http://localhost:8000/api/plants/delete/' + plantId)
-            .then(res => navigate("/home"))
-    }
 
-    console.log(plant.nickname)
+
 
     return (
         <div>
             <TopNavbar/>
-
-            <h3>Details about: {nickname}</h3>
-            <button onClick={(e)=>{deletePlant(plant._id)}}>Remove from my plants</button>
-            <p>Location in the home: {location}</p>
-            <p>Plant Species: {species}</p>
-
+            {loaded && <Displaydetails nickname = {nickname} location = {location} id={id} _id = {_id}  />}
         </div>
     )
 }

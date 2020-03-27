@@ -2,21 +2,23 @@ import React, { useState } from 'react';
 import { Link, navigate } from "@reach/router";
 import axios from 'axios';
 
-export default () => {
-
+export default props => {
+    const {id} = props
     const [nickname, setNickname] = useState(""); 
     const [location, setLocation] = useState(""); 
-    const [species, setSpecies] = useState(""); 
     const [errors, setErrors] = useState([])
+    const [apid, setApid] = useState(id)
+     
 
     const onSubmitHandler = e => {
+        console.log(apid)
         e.preventDefault(); 
         axios.post('http://localhost:8000/api/plants/add', {
             nickname, 
             location,
-            species,
+            apid
         })
-            .then(res=>  navigate('/home'))
+            .then(res=>  navigate("/main"))
             .catch(err=>{ 
                 const errorResponse = err.response.data.errors;
                 const errorArr = [];
@@ -41,21 +43,18 @@ export default () => {
                 <label>Location in your home:</label><br/>
                 <input type="text" onChange = {(e)=>setLocation(e.target.value)}/>
             </p>
-
-            {/* maybe have this be an api call in the future? */}
             <p>
-                <label>Plant Species:</label><br/>
-                <input type="text" onChange = {(e)=>setSpecies(e.target.value)}/>
+                <label>Plant ID:</label>
+                <input type="text" value={apid} onChange = {(e)=>setApid(e.target.value)}/>
             </p>
- 
-            <button>Submit</button>
+            <button type = "submit">Submit</button>
             <br>
             </br>
+        </form>
             <button onClick={(e)=>{navigate('/home')}}>
                     Cancel
                 </button>
  
-        </form>
 
         </div>
     )

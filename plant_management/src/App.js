@@ -7,7 +7,7 @@ import NewPlant from './views/NewPlant';
 import Reg from "./views/Reg"
 import Login from "./views/Login"
 import Home from "./views/Home"
-import Test from "./views/test"
+import Add from "./views/add"
 import { Nav } from 'react-bootstrap';
 
 
@@ -15,13 +15,13 @@ function App() {
   return (
     <div className="App">
       <Router>
-          <Main path="/home"/>
-          <PlantDetails path="/details/:id"/>
-          <NewPlant path="/new"/>
+          <Main path="/main"/>
+          <PlantDetails path="/details/:_id"/>
+          <NewPlant path="/new/:id"/>
           <Reg path ="/register"/>
           <Home path = "/home"/>
           <Login path="/login"/>
-          <Test path="/test"/>
+          <Add path="/add"/>
       </Router>
       
 

@@ -5,7 +5,7 @@ export default props => {
 
     const {results} = props
 
-    const makeDiv = (each, i) => <li key = {i}>{each.common_name} ({each.scientific_name})</li>
+    const makeDiv = (each, i) => <li key = {i} ><Link to={`/new/${each.id}`}>{each.common_name}  ({each.scientific_name})</Link></li>
 
     return (
         <div>

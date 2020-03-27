@@ -18,12 +18,12 @@ const TopNavbar = (props) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/home">HOME</NavbarBrand>
+        <NavbarBrand href="/main">HOME</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/new">Add a new plant!</NavLink>
+              <NavLink href="/add">Add a new plant!</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://plants.usda.gov/java/">Resources</NavLink>

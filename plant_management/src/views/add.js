@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react"
 import axios from "axios"
 import { navigate } from "@reach/router"
 import Results from "./results"
+import {Link} from "@reach/router"
 
 
 export default () => {
@@ -17,7 +18,7 @@ export default () => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        axios.get(`https://trefle.io/api/plants?q=${plant}&token=OEcrNGtuSExseGhhdWduK3JqQ1VtQT09`)
+        axios.post("http://localhost:8000/api/getsearch", {plant},{withCredentials: true})
             .then(res=> {
                 console.log(res.data)
                 setResults(res.data)
@@ -38,6 +39,7 @@ export default () => {
                 </p>
             </form>
             {loaded && <Results results = {results}/>}
+            <Link to="/main">Back to Main Page</Link>
         </div>
     )
 }

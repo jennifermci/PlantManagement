@@ -13,7 +13,7 @@ export default props => {
     const onSubmitHandler = (e) =>{
         e.preventDefault();
         axios.post("http://localhost:8000/api/users/login", {email, password},{withCredentials: true})
-            .then(res=>navigate("/test"))
+            .then(res=>navigate("/main"))
             .catch(err => {
                 console.log(err)
                 // const errorResponse = err.res.data.err;

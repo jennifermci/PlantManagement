@@ -13,8 +13,6 @@ export default props => {
        )
       })
 
-    console.log(props.plants.plants)
-
     return (
         <div >
                 {showPlantList}

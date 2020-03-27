@@ -50,3 +50,10 @@ module.exports.deleteOneUser = (req, res) => {
         .then(res => res.json(res))
         .catch(err=> res.jason({message:"tried to delete a user, but failed.", error: err}))
 }
+
+module.exports.getOneUser = (req,res) => {
+    const {_id} = req.body
+    User.findOne({_id: _id})
+        .then(OneSingUser => res.json({user: OneSingUser}))
+        .catch(err => res.json({message: "Tried to grab one author, but failed.", error: err}))
+}

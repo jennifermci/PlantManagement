@@ -1,29 +1,50 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link } from '@reach/router';
 import Sky from 'react-sky';
 import axios from 'axios';
 import TopNavbar from '../components/Navbar';
 import PlantList from '../components/PlantList';
 import styles from '../components/divStyle.module.css';
+import jwt from "jsonwebtoken"
+import Cookies from "js-cookie"
+import UserContext from "../components/usercontext"
 
 
 
 export default () => {
     const [plants, setPlants] = useState([]);
     const [loaded, setLoaded] = useState(false);
+    const {setLoggeduser} = useContext(UserContext)
+    const [loaded2, setLoaded2] = useState(false);
+
     useEffect(()=>{
-        axios.get('http://localhost:8000/api/plants')
-            .then(res=>{
-                console.log(res.data)
-                setPlants(res.data);
-                setLoaded(true);
-            });
+        const user = Cookies.get("usertoken")
+        const thisUser = jwt.decode(user)
+        const _id = thisUser._id
+        axios.post("http://localhost:8000/api/userlogin",{_id})
+                .then(res=> {
+                    setLoggeduser(res.data.user)
+                    setLoaded2(true);
+                })
+                .then(res=>  {     
+                axios.get('http://localhost:8000/api/plants')
+                    .then(res=>{
+                        setPlants(res.data);
+                        setLoaded(true);
+                        }
+                    )
+                }
+                )
+                .catch(err=> console.log(err))
+
 
     },[])
 
+
+
     return (
         <div>    
-            <TopNavbar/>      
+            {loaded2 && <TopNavbar/>}      
            <Sky
             images ={{
                 0: "https://i.ya-webdesign.com/images/cute-cactus-png-1.png",

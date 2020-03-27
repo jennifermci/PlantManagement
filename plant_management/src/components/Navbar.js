@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Collapse,
   Navbar,
@@ -9,9 +9,12 @@ import {
   NavLink,
   NavbarText
 } from 'reactstrap';
+import UserContext from "./usercontext"
 
 const TopNavbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const {loggeduser} = useContext(UserContext)
+
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -30,7 +33,7 @@ const TopNavbar = (props) => {
             </NavItem>
             
           </Nav>
-          <NavbarText>Signed in as (insert later)</NavbarText>
+          <NavbarText>Signed in as {loggeduser.firstName} {loggeduser.lastName}</NavbarText>
         </Collapse>
       </Navbar>
     </div>

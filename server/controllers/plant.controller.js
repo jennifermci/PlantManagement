@@ -34,7 +34,7 @@ module.exports.updateOnePlant= (req, res) => {
 
 module.exports.searchForPlants = (req, res) => {
     const {plant} = req.body
-    Axios.get(`https://trefle.io/api/plants?q=${plant}&token=OEcrNGtuSExseGhhdWduK3JqQ1VtQT09`)
+    Axios.get(`https://trefle.io/api/plants?q=${plant}&complete_data=true&token=OEcrNGtuSExseGhhdWduK3JqQ1VtQT09`)
         .then(plantsresults => res.json(plantsresults.data))
         .catch(err => console.log(err))
 }

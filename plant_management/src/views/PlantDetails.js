@@ -24,7 +24,6 @@ export default props => {
     }, [])
 
 
-
     return (
         <div>
             <TopNavbar/>

@@ -12,7 +12,7 @@ export default props => {
 
     const deletePlant = (plantId) => {
         axios.delete('http://localhost:8000/api/plants/delete/' + plantId)
-            .then(res => navigate("/home"))
+            .then(res => navigate("/main"))
     }
 
 
@@ -29,6 +29,8 @@ export default props => {
             })
         }, [])
 
+    console.log(plant)
+    console.log("hello",plant.main_species)
 
     const imagery = imagearray.map((each)=> <img style={{width:200, height:200}} src={each} alt="image"/>)
 

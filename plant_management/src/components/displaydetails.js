@@ -8,7 +8,10 @@ export default props => {
     const {id, nickname, location, _id} = props
     const [plant, setPlant] = useState({})
     const [imagearray, setImagearray] = useState([])
-    const [test, setTest] = useState(false)
+    const [test, setTest] = useState()
+    const [ph, setPh] = useState()
+    const [precip, setPrecip] = useState()
+    const [tempMin, setTempmin] = useState()
 
     const deletePlant = (plantId) => {
         axios.delete('http://localhost:8000/api/plants/delete/' + plantId)
@@ -20,7 +23,9 @@ export default props => {
         axios.post("http://localhost:8000/api/getoneresult", {id})
             .then(res => {
                 setPlant(res.data)
-
+                setPh(res.data.main_species.growth.ph_maximum)
+                setPrecip(res.data.main_species.growth.precipitation_maximum.inches)
+                setTempmin(res.data.main_species.growth.temperature_minimum.deg_f)
                 res.data.images.forEach(image => {
                     imagearray.push(image.url)
                     setImagearray(imagearray)
@@ -30,7 +35,9 @@ export default props => {
         }, [])
 
     console.log(plant)
-    console.log("hello",plant.main_species)
+    console.log(typeof test)
+    console.log(typeof plant.scientific_name)
+
 
     const imagery = imagearray.map((each)=> <img style={{width:200, height:200}} src={each} alt="image"/>)
 
@@ -41,6 +48,9 @@ export default props => {
             <p>Common Name: {plant.common_name}</p>
             <p>Common Family Name: {plant.family_common_name}</p>
             <p>Scientific Name: {plant.scientific_name}</p>
+            <p>PH Maximum: {ph}</p>
+            <p>Max Precipitation: {precip} Inches</p>
+            <p>Minimum Temperature: {tempMin}°F</p>
             {imagery}
             <button onClick={(e)=>{deletePlant(_id)}}>Remove from my plants</button>
             {/* <button onClick={makeImages}>Clicky for planty imagesy</button> */}

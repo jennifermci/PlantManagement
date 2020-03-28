@@ -21,7 +21,7 @@ export default () => {
         const user = Cookies.get("usertoken")
         const thisUser = jwt.decode(user)
         const _id = thisUser._id
-        axios.post("http://localhost:8000/api/userlogin",{_id})
+        axios.post("http://localhost:8000/api/userlogin",{_id},{withCredentials: true})
                 .then(res=> {
                     setLoggeduser(res.data.user)
                     setLoaded2(true);

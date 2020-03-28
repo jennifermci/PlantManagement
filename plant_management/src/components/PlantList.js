@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import {Link, navigate} from "@reach/router"
-import axios from 'axios';
+import React from 'react'
+import {Link} from "@reach/router"
+
 
 export default props => {
 
@@ -8,7 +8,6 @@ export default props => {
        return (
            <div>
                 <Link to={`/details/${plant._id}`} key={idx}>{plant.nickname}<br/></Link>
-                {/* {plant.nickname} */}
             </div>
        )
       })

@@ -33,7 +33,15 @@ const TopNavbar = (props) => {
             </NavItem>
             
           </Nav>
-          <NavbarText>Signed in as {loggeduser.firstName} {loggeduser.lastName}</NavbarText>
+          <Nav navbar>
+          <NavbarText>Signed in as {loggeduser.firstName} {loggeduser.lastName}    |      </NavbarText>
+          <NavItem>
+              <NavLink href="">Edit My Account    |      </NavLink>
+          </NavItem>
+          <NavItem>
+              <NavLink href="">Logout</NavLink>
+          </NavItem>
+          </Nav>
         </Collapse>
       </Navbar>
     </div>

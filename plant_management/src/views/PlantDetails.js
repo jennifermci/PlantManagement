@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { navigate,Link } from '@reach/router';
 import TopNavbar from '../components/Navbar';
 import Displaydetails from "../components/displaydetails"
+import Imagedisplay from "../components/imagedisplay"
 
 export default props => {
     const { _id } = props;
@@ -22,7 +22,6 @@ export default props => {
                 setLoaded(true)
             })
     }, [])
-
 
     return (
         <div>

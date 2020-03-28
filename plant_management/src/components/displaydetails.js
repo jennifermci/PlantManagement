@@ -1,14 +1,14 @@
 import React, { useState, useEffect} from "react"
 import axios from "axios"
 import {navigate} from "@reach/router"
-import PlantDetails from "../views/PlantDetails"
+import Imagedisplay from "./imagedisplay"
 
 export default props => {
 
     const {id, nickname, location, _id} = props
     const [plant, setPlant] = useState({})
     const [imagearray, setImagearray] = useState([])
-    const [test, setTest] = useState()
+    const [test, setTest] = useState(false)
     const [ph, setPh] = useState()
     const [precip, setPrecip] = useState()
     const [tempMin, setTempmin] = useState()
@@ -29,17 +29,10 @@ export default props => {
                 res.data.images.forEach(image => {
                     imagearray.push(image.url)
                     setImagearray(imagearray)
-                    setTest(true)
-                })
+                    })
+                setTest(true)
             })
         }, [])
-
-    console.log(plant)
-    console.log(typeof test)
-    console.log(typeof plant.scientific_name)
-
-
-    const imagery = imagearray.map((each)=> <img style={{width:200, height:200}} src={each} alt="image"/>)
 
     return(
         <div>
@@ -51,9 +44,9 @@ export default props => {
             <p>PH Maximum: {ph}</p>
             <p>Max Precipitation: {precip} Inches</p>
             <p>Minimum Temperature: {tempMin}°F</p>
-            {imagery}
+            {test && <Imagedisplay imagearray = {imagearray}/>}
+            <br/>
             <button onClick={(e)=>{deletePlant(_id)}}>Remove from my plants</button>
-            {/* <button onClick={makeImages}>Clicky for planty imagesy</button> */}
         </div>
     )
 

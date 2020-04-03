@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react"
 import axios from "axios"
 import { navigate } from "@reach/router"
-import Results from "./results"
+import Results from "../components/results"
 import {Link} from "@reach/router"
-
+import styles from '../components/divStyle.module.css';
+import {Button} from "reactstrap"
 
 export default () => {
 
@@ -29,13 +30,13 @@ export default () => {
 
 
     return (
-        <div>
+        <div className = {styles.loginbox} style={{width:400, display: "inline-block"}}>
             <h1>Find your plant!</h1>
             <form onSubmit = {onSubmitHandler}>
                 <p>
                     <label>What kind of plant is it?</label>
                     <input type="text" onChange = {(e)=> {setPlant(e.target.value)}}/>
-                    <button type="submit">Click here to capture more info on your plant!</button>
+                    <Button type="submit">Click here to capture more info on your plant!</Button>
                 </p>
             </form>
             {loaded && <Results results = {results}/>}

@@ -11,3 +11,27 @@
 .textFont {
     color: white;
 }
+
+.loginbox {
+    margin: auto;
+    background-color: lightgreen;
+    color: forestgreen;
+    border: 5px solid forestgreen;
+    border-radius: 15px;
+}
+
+.homeimg {
+    width: 100%;
+    height: 300px;
+}
+
+.homecard {
+    display: inline-block;
+    height: 600px;
+    width: 400px;
+}
+
+.homebutton {
+    color: white;
+    background: forestgreen;
+}

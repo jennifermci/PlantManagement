@@ -8,8 +8,8 @@ module.exports.findAllPlants = (req, res) =>{
 }
 
 module.exports.addOnePlant = (req, res) => {
-    const {nickname, location, apid } = req.body;
-    Plant.create({nickname, location, apid})
+    const {nickname, location, apid, waterhistory } = req.body;
+    Plant.create({nickname, location, apid, waterhistory})
         .then(newlyCreatedPlant => res.json({plant: newlyCreatedPlant}))
         .catch(err => res.status(400).json(err))
 }
@@ -27,8 +27,12 @@ module.exports.getOnePlant = (req,res) => {
 }
 
 module.exports.updateOnePlant= (req, res) => {
-    Plant.findOneAndUpdate({_id: req.params.id}, req.body, {runValidators:true})
-        .then(updatedAuthor => res.json(updatedAuthor))
+    const {id, newwaterhistory} = req.body
+    Plant.findOneAndUpdate({_id: id},
+        {$set:
+            {'waterhistory': newwaterhistory}
+        })
+        .then(updatedPlant => res.json(updatedPlant))
         .catch(err => res.status(400).json(err))
 }
 

@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import axios from "axios"
 import {Link} from "@reach/router"
+import styles from '../components/divStyle.module.css';
 
 export default props => {
 
@@ -13,7 +14,8 @@ export default props => {
 
     const onSubmitHandler = e =>{
         e.preventDefault();
-        axios.post("http://localhost:8000/api/users/new",{firstName, lastName, email, password, confirmPassword})
+        let plants = []
+        axios.post("http://localhost:8000/api/users/new",{firstName, lastName, email, password, confirmPassword, plants})
             .then(res=> console.log(res.data.msg))
             .catch(err => {
                 const errorResponse = err.response.data.errors;
@@ -26,7 +28,7 @@ export default props => {
     }
 
     return (
-        <div>
+        <div className={styles.loginbox} style={{width:400, display: "inline-block"}}>
             <h1>Register Here:</h1>
             <form onSubmit = {onSubmitHandler}>
                 {errors.map((each, i)=> <h5 key={i}>{each}</h5>)}
@@ -53,6 +55,8 @@ export default props => {
                 <button type="submit">Register as a new User!</button>
             </form>
             <Link to="/login">Already have an account? Clicker here to login!</Link>
+            <br/>
+            <Link to="/home">Back to Home Page</Link>
         </div>
     )
 }

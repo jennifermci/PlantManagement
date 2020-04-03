@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Link } from '@reach/router';
+import { Link, navigate } from '@reach/router';
 import Sky from 'react-sky';
 import axios from 'axios';
 import TopNavbar from '../components/Navbar';
@@ -12,13 +12,15 @@ import UserContext from "../components/usercontext"
 
 
 export default () => {
-    const [plants, setPlants] = useState([]);
     const [loaded, setLoaded] = useState(false);
-    const {setLoggeduser} = useContext(UserContext)
+    const {setLoggeduser, allPlants, setAllPlants} = useContext(UserContext)
     const [loaded2, setLoaded2] = useState(false);
 
     useEffect(()=>{
         const user = Cookies.get("usertoken")
+        if (user === undefined){
+            navigate("/home")
+        } else{
         const thisUser = jwt.decode(user)
         const _id = thisUser._id
         axios.post("http://localhost:8000/api/userlogin",{_id},{withCredentials: true})
@@ -29,18 +31,16 @@ export default () => {
                 .then(res=>  {     
                 axios.get('http://localhost:8000/api/plants')
                     .then(res=>{
-                        setPlants(res.data);
+                        setAllPlants(res.data);
                         setLoaded(true);
                         }
                     )
                 }
                 )
-                .catch(err=> console.log(err))
-
+                .catch(err=> navigate("/home"))
+        }
 
     },[])
-
-
 
     return (
         <div>    
@@ -59,7 +59,7 @@ export default () => {
            
             <div className={styles.boxStyle}>
                 <h3 className={styles.textFont}>Current saved plants:</h3>
-                {loaded && <PlantList plants={plants}/>}
+                {loaded && <PlantList plants={allPlants}/>}
             </div>
 
 

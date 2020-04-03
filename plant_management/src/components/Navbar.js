@@ -10,6 +10,7 @@ import {
   NavbarText
 } from 'reactstrap';
 import UserContext from "./usercontext"
+import Logout from "./logout"
 
 const TopNavbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +32,9 @@ const TopNavbar = (props) => {
             <NavItem>
               <NavLink href="https://plants.usda.gov/java/">Resources</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink href="/graph">Graph my plants!</NavLink>
+            </NavItem>
             
           </Nav>
           <Nav navbar>
@@ -39,7 +43,7 @@ const TopNavbar = (props) => {
               <NavLink href="">Edit My Account    |      </NavLink>
           </NavItem>
           <NavItem>
-              <NavLink href="">Logout</NavLink>
+              <Logout/>
           </NavItem>
           </Nav>
         </Collapse>

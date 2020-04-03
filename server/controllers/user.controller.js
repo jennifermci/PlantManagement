@@ -21,7 +21,7 @@ module.exports.loginOneUser = (req, res) => {
     User.findOne({ email: req.body.email })
       .then(user => {
         if (user === null) {
-          res.json({ msg: "user: invalid login attempt" });
+          res.json({ msg: "Could not find user in our records." });
         } else {
             bcrypt.compare(req.body.password, user.password).then(passwordIsValid => {
                 if (passwordIsValid) {
@@ -36,13 +36,13 @@ module.exports.loginOneUser = (req, res) => {
                         })
                         .json({ msg: "success!" });
                 } else {
-                  res.json({ msg: "bcrpyt else: invalid login attempt" });
+                  res.json({ msg: "Incorrect password, please try again." });
                 }
               })
-              .catch(err => res.json({ msg: "bcrypt err: invalid login attempt" }));
+              .catch(err => res.status(400).json(err));
           }
       })
-      .catch(err => res.json(err));
+      .catch(err => res.status(400).json(err));
   };
 
 module.exports.deleteOneUser = (req, res) => {
@@ -56,4 +56,14 @@ module.exports.getOneUser = (req,res) => {
     User.findOne({_id: _id})
         .then(OneSingUser => res.json({user: OneSingUser}))
         .catch(err => res.json({message: "Tried to grab one author, but failed.", error: err}))
+}
+
+module.exports.updateOneUser= (req, res) => {
+    const {userId, newPlantsList} = req.body
+    Plant.findOneAndUpdate({_id: userId},
+        {$set:
+            {'plants': newPlantsList}
+        })
+        .then(updatedUser => res.json(updatedUser))
+        .catch(err => res.status(400).json(err))
 }

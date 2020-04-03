@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import TopNavbar from '../components/Navbar';
 import Displaydetails from "../components/displaydetails"
-import Imagedisplay from "../components/imagedisplay"
+import styles from '../components/divStyle.module.css';
 
 export default props => {
     const { _id } = props;
@@ -11,6 +11,8 @@ export default props => {
     const [id, setId] = useState();
     const [plant, setPlant] = useState({})
     const [loaded, setLoaded] = useState(false)
+    const [timeSinceLastWater, setTimeSinceLastWater] = useState()
+    const [waterhistory, setWaterhistory] = useState()
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/plants/' + _id)
@@ -19,14 +21,17 @@ export default props => {
                 setLocation(res.data.plant.location);
                 setId(res.data.plant.apid);
                 setPlant(res.data.plant)
+                setWaterhistory(res.data.plant.waterhistory)
+                setTimeSinceLastWater(res.data.plant.updatedAt)
                 setLoaded(true)
+                
             })
     }, [])
 
     return (
-        <div>
+        <div className = {styles.loginbox}>
             <TopNavbar/>
-            {loaded && <Displaydetails nickname = {nickname} location = {location} id={id} _id = {_id}  />}
+            {loaded && <Displaydetails nickname = {nickname} location = {location} id={id} _id = {_id} timeSinceLastWater={timeSinceLastWater} waterhistory={waterhistory}  />}
         </div>
     )
 }

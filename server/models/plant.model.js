@@ -12,6 +12,10 @@ const PlantSchema = new mongoose.Schema({
     apid: {
         type: String,
         required: true
+    },
+    waterhistory: {
+        type: Array,
+        required: true,
     }
 }, {timestamps: true })
 

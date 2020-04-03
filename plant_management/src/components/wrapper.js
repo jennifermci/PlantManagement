@@ -6,12 +6,12 @@ const Wrapper = (props) =>{
 
    
     const [loggeduser, setLoggeduser] = useState([])
-   
+    const [allPlants, setAllPlants] = useState([])
 
 
     return(
             
-        <UserContext.Provider value = {{loggeduser, setLoggeduser}}>
+        <UserContext.Provider value = {{loggeduser, setLoggeduser, allPlants, setAllPlants}}>
             {props.children}
         </UserContext.Provider>
 

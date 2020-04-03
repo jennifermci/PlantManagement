@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Link} from "@reach/router"
+import UserContext from "../components/usercontext"
 
 
 export default props => {
+
+    const {loggeduser} = useContext(UserContext)
 
     const showPlantList = props.plants.plants.map((plant, idx)=>{
        return (

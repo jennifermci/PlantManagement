@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, navigate } from "@reach/router";
 import axios from 'axios';
+import UserContext from "../components/usercontext"
 
 export default props => {
     const {id} = props
@@ -8,17 +9,29 @@ export default props => {
     const [location, setLocation] = useState(""); 
     const [errors, setErrors] = useState([])
     const [apid, setApid] = useState(id)
+    const {loggeduser} = useContext(UserContext)
      
 
     const onSubmitHandler = e => {
-        console.log(apid)
         e.preventDefault(); 
+        let waterhistory = []
         axios.post('http://localhost:8000/api/plants/add', {
             nickname, 
             location,
-            apid
+            apid,
+            waterhistory
         })
-            .then(res=>  navigate("/main"))
+            .then(res=>  { 
+                // console.log(res.data.plant)
+                //udate user: add plant id to plants array key in user - to add one to many relationship
+            //     loggeduser.plants.push(res.data.plant._id)
+            //     const newPlantsList = loggeduser.plants
+            //     const userId = loggeduser._id
+            //     console.log(newPlantsList)
+            //     console.log(userId)
+                // axios.put("http://localhost:8000/api/addplanttouser", {userId, newPlantsList})
+                navigate("/main")
+            })
             .catch(err=>{ 
                 const errorResponse = err.response.data.errors;
                 const errorArr = [];

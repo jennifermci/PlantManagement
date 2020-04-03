@@ -8,8 +8,8 @@ import Reg from "./views/Reg"
 import Login from "./views/Login"
 import Home from "./views/Home"
 import Add from "./views/add"
-import { Nav } from 'react-bootstrap';
 import Wrapper from "./components/wrapper"
+import Graphmyplants from "./views/graphmyplants"
 
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
             <Home path = "/home"/>
             <Login path="/login"/>
             <Add path="/add"/>
+            <Graphmyplants path = "/graph"/>
         </Router>
       </Wrapper>
 

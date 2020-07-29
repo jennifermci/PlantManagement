@@ -38,14 +38,14 @@ module.exports.updateOnePlant= (req, res) => {
 
 module.exports.searchForPlants = (req, res) => {
     const {plant} = req.body
-    Axios.get(`https://trefle.io/api/plants?q=${plant}&complete_data=true&token=OEcrNGtuSExseGhhdWduK3JqQ1VtQT09`)
+    Axios.get(`https://trefle.io/api/v1/plants/search?token=OEcrNGtuSExseGhhdWduK3JqQ1VtQT09&q=${plant}&complete_data=true`)
         .then(plantsresults => res.json(plantsresults.data))
         .catch(err => console.log(err))
 }
 
 module.exports.searchForOnePlant = (req, res) => {
     const {id} = req.body
-    Axios.get(`https://trefle.io/api/plants/${id}?token=OEcrNGtuSExseGhhdWduK3JqQ1VtQT09`)
+    Axios.get(`https://trefle.io/api/v1/plants/${id}?token=OEcrNGtuSExseGhhdWduK3JqQ1VtQT09`)
         .then(plantresults => res.json(plantresults.data))
         .catch(err => console.log(err))
 }

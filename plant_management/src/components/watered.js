@@ -48,7 +48,7 @@ export default props => {
     }
 
     return(
-        <div className = {styles.loginbox} style={{width:400, display : 'inline-block'}}>
+        <div className = {styles.loginbox2} style={{width:400, display: "flex", justifyContent: "center", alignItems: "center", height: 300}}>
         {loaded &&
             <div>
                 <p>Day last watered: {lastWatered}</p>

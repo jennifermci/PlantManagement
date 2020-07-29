@@ -11,9 +11,22 @@
 .textFont {
     color: white;
 }
-
 .loginbox {
-    margin: auto;
+    background-color: lightgreen;
+    color: forestgreen;
+    border: 5px solid forestgreen;
+    border-radius: 15px;
+}
+
+.loginbox2 {
+    margin: 20px;
+    background-color: lightgreen;
+    color: forestgreen;
+    border: 5px solid forestgreen;
+    border-radius: 15px;
+}
+.loginbox3 {
+    padding-top: 20px;
     background-color: lightgreen;
     color: forestgreen;
     border: 5px solid forestgreen;

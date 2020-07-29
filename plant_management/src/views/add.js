@@ -21,8 +21,7 @@ export default () => {
         e.preventDefault();
         axios.post("http://localhost:8000/api/getsearch", {plant},{withCredentials: true})
             .then(res=> {
-                console.log(res.data)
-                setResults(res.data)
+                setResults(res.data.data)
                 setLoaded(true)
             })
 
